@@ -1,4 +1,12 @@
 <style>
+    @import "../app.css";
+    
+    #searchSection{
+        margin:0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
     #touchless{
         height: 1em;
         width: 300px;
@@ -6,17 +14,22 @@
         border-radius: 15px;
         margin: 0 auto;
         padding:10px;
+        display: inline-block;
     }
     
     #filterContainer{
+        margin-bottom: 10px;
         display: flex;
+        justify-content: center;
         gap:5px;
+        width: 100%;
     }
 </style>
 <script lang="ts">
-    import { enhance } from "$app/forms";
 
-    const SEARCH_FILTERS = ["tech ID", "tech name", "Appt", "RO", "Customer", "plate"]
+
+    const SEARCH_FILTERS = ["TechID", 
+        "Tech name", "Appt", "RO", "Customer", "Plate", "Phone", "CustomerId"]
 
     let searchText:string
     let searchTextClean: {[k in string]:string} = {}
@@ -25,7 +38,7 @@
 
     $: {
         const match = /\b(.*):&/i.exec(searchText)
-        if (match && SEARCH_FILTERS.includes(match[1])){
+        if (match && SEARCH_FILTERS.map(s=>s.toLocaleLowerCase()).includes(match[1].toLocaleLowerCase())){
             const group = match[1]
             searchText = searchText.replace(group, wrappedFilter(group))
             const touchlessEl = document.getElementById("touchless")
@@ -74,21 +87,20 @@
 <h1>Hello Person</h1>
 
 
+<div id="searchSection">
 
-<form method="post" action="/api/customers" use:enhance={({ formElement, formData, action, cancel, submitter })=>{
-    return async ({ result })=>{
-        formElement.reset()
-    }
-}}>
     <div id="filterContainer">
-
+        
         {#each SEARCH_FILTERS as search}
-        <span class="selectable">{search}</span>
+        <span class="selectable pointer">{search}</span>
         {/each}
     </div>
-     <div id="touchless" contenteditable bind:innerHTML={searchText} 
-            on:keydown={filterInput} role="textbox" tabindex="0"></div>
-</form>
-<h3>Appointments</h3>
-<h3>Repair Orders</h3>
-<h3>Techs</h3>
+    <div id="touchless" contenteditable bind:innerHTML={searchText} 
+        on:keydown={filterInput} role="textbox" tabindex="0">
+    </div>
+    <button>Create</button>
+</div>
+
+<h3>Todays Appointments</h3>
+<h3>Todays Repair Orders</h3>
+<h3>Scheduled Techs</h3>
