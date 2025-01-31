@@ -80,7 +80,10 @@
             }
             e.preventDefault()
         }
-        
+    }
+
+    async function test(){
+        await fetch("api")
     }
 </script>
 
@@ -98,7 +101,7 @@
     <div id="touchless" contenteditable bind:innerHTML={searchText} 
         on:keydown={filterInput} role="textbox" tabindex="0">
     </div>
-    <button>Create</button>
+    <button on:click={test}>Create</button>
 </div>
 
 <h3>Todays Appointments</h3>
