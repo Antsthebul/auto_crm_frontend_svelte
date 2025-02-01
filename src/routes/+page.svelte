@@ -1,6 +1,19 @@
 <style>
     @import "../app.css";
-    
+
+    .searchWindow{
+        height: 450px;
+
+    }
+    .scheduleSummary{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 1px solid black;
+        border-radius: 15px;
+    }
+
     #searchSection{
         margin:0 auto;
         display: flex;
@@ -12,7 +25,6 @@
         width: 300px;
         border: 1px solid lightgrey;
         border-radius: 15px;
-        margin: 0 auto;
         padding:10px;
         display: inline-block;
     }
@@ -23,6 +35,9 @@
         justify-content: center;
         gap:5px;
         width: 100%;
+    }
+    .test{
+        justify-content: center;
     }
 </style>
 <script lang="ts">
@@ -73,7 +88,7 @@
         
         if (e.key === "Enter"){
             if (!Object.keys(searchTextClean).length){
-                alert("Add datata")
+                
             }else{
                 alert(JSON.stringify(searchTextClean))
 
@@ -82,16 +97,13 @@
         }
     }
 
-    async function test(){
-        await fetch("api")
-    }
+
 </script>
 
 <h1>Hello Person</h1>
 
 
 <div id="searchSection">
-
     <div id="filterContainer">
         
         {#each SEARCH_FILTERS as search}
@@ -101,9 +113,26 @@
     <div id="touchless" contenteditable bind:innerHTML={searchText} 
         on:keydown={filterInput} role="textbox" tabindex="0">
     </div>
-    <button on:click={test}>Create</button>
+    <button class="btn">Search</button>
 </div>
 
-<h3>Todays Appointments</h3>
-<h3>Todays Repair Orders</h3>
-<h3>Scheduled Techs</h3>
+<div class="searchWindow">
+    Search:
+</div>
+
+<div class="position-rel bottom">
+    <div class="scheduleSummary">
+        
+        <div class="w-100">
+            <h3>Todays Appointments</h3>
+        </div>
+        
+        <div class="w-100">
+            <h3>Todays Repair Orders</h3>
+        </div>
+        
+        <div class="w-100">
+            <h3>Scheduled Techs</h3>
+        </div>
+    </div>
+</div>

@@ -4,3 +4,38 @@
 .pointer:hover{
     cursor: pointer;
 }
+.center{
+    margin: 0 auto;
+}
+.display-flex{
+    display:flex
+}
+.justify-content-center{
+    justify-content: center;
+}
+.w-100{
+    width: 100%;
+}
+.flex-wrap{
+    flex-wrap: wrap;
+}
+.position-rel{
+    position: relative;
+}
+.position-abs{
+    position: absolute;
+}
+.t-50{
+    top: 50%;
+}
+.l-50{
+    left:50%;
+}
+
+.btn:link{
+
+}
+
+.btn:hover{
+    box-shadow: 0px 10px 10px lightgrey;
+}
